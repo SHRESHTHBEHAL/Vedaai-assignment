@@ -18,8 +18,9 @@ const app = express();
 const server = http.createServer(app);
 
 // ── Express middleware ──────────────────────────────────────
+const frontendOrigin = (process.env.FRONTEND_URL ?? "http://localhost:3000").replace(/\/+$/, "");
 app.use(
-  cors({ origin: process.env.FRONTEND_URL ?? "http://localhost:3000" }),
+  cors({ origin: frontendOrigin }),
 );
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
