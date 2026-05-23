@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: vedaai-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npx tsx apps/api/src/server.ts
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3-flash-preview
+      - key: MAX_FILE_SIZE_MB
+        value: "10"
+      - key: MONGODB_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+    healthCheckPath: /api/v1/health
